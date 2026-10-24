@@ -1,0 +1,62 @@
+{
+  "tests": [
+    {
+      "name": "Min Value",
+      "description": "The minimum value of the column **correctness** is 0.0 The test threshold is gte=1.",
+      "status": "FAIL",
+      "group": "data_quality",
+      "parameters": {
+        "condition": {
+          "gte": 1
+        },
+        "value": 0.0
+      }
+    },
+    {
+      "name": "Min Value",
+      "description": "The minimum value of the column **groundedness** is 0.0 The test threshold is gte=1.",
+      "status": "FAIL",
+      "group": "data_quality",
+      "parameters": {
+        "condition": {
+          "gte": 1
+        },
+        "value": 0.0
+      }
+    },
+    {
+      "name": "Min Value",
+      "description": "The minimum value of the column **completed** is 0.0 The test threshold is gte=1.",
+      "status": "FAIL",
+      "group": "data_quality",
+      "parameters": {
+        "condition": {
+          "gte": 1
+        },
+        "value": 0.0
+      }
+    },
+    {
+      "name": "Min Value",
+      "description": "The minimum value of the column **usage_complete** is 1.0 The test threshold is gte=1.",
+      "status": "SUCCESS",
+      "group": "data_quality",
+      "parameters": {
+        "condition": {
+          "gte": 1
+        },
+        "value": 1.0
+      }
+    }
+  ],
+  "summary": {
+    "all_passed": false,
+    "total_tests": 4,
+    "success_tests": 1,
+    "failed_tests": 3,
+    "by_status": {
+      "FAIL": 3,
+      "SUCCESS": 1
+    }
+  }
+}

@@ -1,0 +1,13 @@
+[
+  {"id":"agreement","query":"How much annual leave carryover is allowed?","expected_status":"verified","expected_key":"carryover_days","expected_value":"up to 5 unused days","search_terms":["carryover","carry","unused"],"max_reasonable_steps":4},
+  {"id":"stale_conflict","query":"How many annual leave days do employees receive?","expected_status":"verified","expected_key":"annual_leave_days","expected_value":"22 paid days per calendar year","search_terms":["leave","vacation","entitlement"],"max_reasonable_steps":5},
+  {"id":"remote","query":"How many remote work days can full-time employees use?","expected_status":"verified","expected_key":"remote_days","expected_value":"2 remote days per week for full-time employees","search_terms":["remote","home"],"max_reasonable_steps":4},
+  {"id":"ambiguous","query":"What is the policy?","expected_status":"needs_clarification","search_terms":[],"max_reasonable_steps":2},
+  {"id":"contractor_scope","query":"Can contractors use the employee remote work allowance?","expected_status":"needs_clarification","search_terms":["contractor","remote"],"max_reasonable_steps":4},
+  {"id":"missing_policy","query":"What is the sabbatical allowance?","expected_status":"insufficient_evidence","search_terms":["sabbatical"],"max_reasonable_steps":5},
+  {"id":"single_source","query":"What is the meal reimbursement allowance?","expected_status":"insufficient_evidence","search_terms":["meal","reimbursement"],"max_reasonable_steps":5},
+  {"id":"registry_outage","query":"How many annual leave days do employees receive?","expected_status":"insufficient_evidence","failure":"registry_unavailable","search_terms":["leave","vacation","entitlement"],"max_reasonable_steps":5},
+  {"id":"malformed_output","query":"How much annual leave carryover is allowed?","expected_status":"insufficient_evidence","failure":"malformed_registry","search_terms":["carryover","carry","unused"],"max_reasonable_steps":5},
+  {"id":"tool_timeout","query":"How many remote work days can full-time employees use?","expected_status":"insufficient_evidence","failure":"registry_timeout","search_terms":["remote","home"],"max_reasonable_steps":5},
+  {"id":"step_budget","query":"How many annual leave days do employees receive?","expected_status":"verified","expected_key":"annual_leave_days","expected_value":"22 paid days per calendar year","max_steps":1,"search_terms":["leave","vacation"],"max_reasonable_steps":1}
+]

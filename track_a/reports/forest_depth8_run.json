@@ -1,0 +1,32 @@
+{
+  "model": "forest_depth8",
+  "run_id": "0839ff005a284f7b977a5b1b1c111666",
+  "validation_accuracy": 0.7537260468417317,
+  "validation_precision": 0.5247706422018349,
+  "validation_recall": 0.7647058823529411,
+  "validation_f1": 0.6224156692056583,
+  "validation_roc_auc": 0.8388333462502262,
+  "fit_seconds": 0.2534356520000074,
+  "parameters": {
+    "bootstrap": true,
+    "ccp_alpha": 0.0,
+    "class_weight": "balanced",
+    "criterion": "gini",
+    "max_depth": 8,
+    "max_features": "sqrt",
+    "max_leaf_nodes": null,
+    "max_samples": null,
+    "min_impurity_decrease": 0.0,
+    "min_samples_leaf": 5,
+    "min_samples_split": 2,
+    "min_weight_fraction_leaf": 0.0,
+    "monotonic_cst": null,
+    "n_estimators": 180,
+    "n_jobs": 2,
+    "oob_score": false,
+    "random_state": 42,
+    "verbose": 0,
+    "warm_start": false
+  },
+  "artifact_uri": "runs:/0839ff005a284f7b977a5b1b1c111666/model"
+}

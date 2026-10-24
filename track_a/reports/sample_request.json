@@ -1,0 +1,46 @@
+{
+  "customers": [
+    {
+      "tenure": 72,
+      "MonthlyCharges": 114.05,
+      "TotalCharges": 8468.2,
+      "gender": "Male",
+      "SeniorCitizen": "0",
+      "Partner": "Yes",
+      "Dependents": "Yes",
+      "PhoneService": "Yes",
+      "MultipleLines": "Yes",
+      "InternetService": "Fiber optic",
+      "OnlineSecurity": "Yes",
+      "OnlineBackup": "Yes",
+      "DeviceProtection": "Yes",
+      "TechSupport": "Yes",
+      "StreamingTV": "Yes",
+      "StreamingMovies": "Yes",
+      "Contract": "Two year",
+      "PaperlessBilling": "Yes",
+      "PaymentMethod": "Credit card (automatic)"
+    },
+    {
+      "tenure": 8,
+      "MonthlyCharges": 100.15,
+      "TotalCharges": 908.55,
+      "gender": "Female",
+      "SeniorCitizen": "1",
+      "Partner": "No",
+      "Dependents": "No",
+      "PhoneService": "Yes",
+      "MultipleLines": "Yes",
+      "InternetService": "Fiber optic",
+      "OnlineSecurity": "No",
+      "OnlineBackup": "No",
+      "DeviceProtection": "No",
+      "TechSupport": "Yes",
+      "StreamingTV": "Yes",
+      "StreamingMovies": "Yes",
+      "Contract": "Month-to-month",
+      "PaperlessBilling": "Yes",
+      "PaymentMethod": "Credit card (automatic)"
+    }
+  ]
+}

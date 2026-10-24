@@ -1,0 +1,21 @@
+{
+  "outer_tests": {
+    "passed": 8,
+    "command": ".venv/bin/python -m pytest -q",
+    "upstream_deprecation_warnings": 3
+  },
+  "lint": {
+    "passed": true,
+    "command": ".venv/bin/ruff check experiment.py tests"
+  },
+  "clean_copy": {
+    "uv_sync_locked_passed": true,
+    "pytest_passed": 7,
+    "note": "Independent clean-directory validation preceded the additional malformed-action regression test; dependencies did not change."
+  },
+  "vendored_assistant_tests": {
+    "passed": 75,
+    "source_repository": "https://github.com/gyaneshwar01/wk-16-agentic-ai",
+    "source_commit": "be3ba42320c76fd84e73ef16c1a641691459e3f1"
+  }
+}

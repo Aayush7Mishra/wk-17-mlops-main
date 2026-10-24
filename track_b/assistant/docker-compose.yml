@@ -1,0 +1,219 @@
+name: wk-16-agentic-ai
+
+x-backend-environment: &backend-environment
+  ENVIRONMENT: "${ENVIRONMENT:-production}"
+  LOG_LEVEL: "${LOG_LEVEL:-INFO}"
+  CORS_ORIGINS: "${CORS_ORIGINS:-http://localhost:8501}"
+  APP_API_KEY: "${APP_API_KEY:-}"
+  AGENT_MODE: "${AGENT_MODE:-offline}"
+  AGENT_MODEL: "${AGENT_MODEL:-gpt-4o-mini}"
+  AGENT_BASE_URL: "${AGENT_BASE_URL:-https://api.openai.com/v1}"
+  AGENT_API_KEY: "${AGENT_API_KEY:-}"
+  AGENT_MAX_STEPS: "${AGENT_MAX_STEPS:-8}"
+  PRIMARY_PROVIDER: "${PRIMARY_PROVIDER:-openai}"
+  PRIMARY_MODEL: "${PRIMARY_MODEL:-gpt-4.1-mini}"
+  PRIMARY_BASE_URL: "${PRIMARY_BASE_URL:-https://api.openai.com/v1}"
+  PRIMARY_API_KEY: "${PRIMARY_API_KEY:-}"
+  FALLBACK_PROVIDER: "${FALLBACK_PROVIDER:-}"
+  FALLBACK_MODEL: "${FALLBACK_MODEL:-local-model}"
+  FALLBACK_BASE_URL: "${FALLBACK_BASE_URL:-http://vllm:8000/v1}"
+  FALLBACK_API_KEY: "${FALLBACK_API_KEY:-local-not-used}"
+  EMBEDDING_PROVIDER: "${EMBEDDING_PROVIDER:-fastembed}"
+  EMBEDDING_MODEL: "${EMBEDDING_MODEL:-BAAI/bge-small-en-v1.5}"
+  FASTEMBED_CACHE_PATH: /home/appuser/.cache/fastembed
+  VECTOR_STORE: "${VECTOR_STORE:-qdrant}"
+  COLLECTION_NAME: "${COLLECTION_NAME:-assistant_documents}"
+  QDRANT_URL: "${QDRANT_URL:-http://qdrant:6333}"
+  REDIS_URL: "${REDIS_URL:-redis://redis:6379/0}"
+  REDIS_TIMEOUT_SECONDS: "${REDIS_TIMEOUT_SECONDS:-2}"
+  RATE_LIMIT_REQUESTS: "${RATE_LIMIT_REQUESTS:-30}"
+  RATE_LIMIT_WINDOW_SECONDS: "${RATE_LIMIT_WINDOW_SECONDS:-60}"
+  BATCH_CONCURRENCY: "${BATCH_CONCURRENCY:-4}"
+  CACHE_TTL_SECONDS: "${CACHE_TTL_SECONDS:-300}"
+  MAX_TOKENS: "${MAX_TOKENS:-700}"
+  PROVIDER_TIMEOUT_SECONDS: "${PROVIDER_TIMEOUT_SECONDS:-20}"
+  PROVIDER_TOTAL_TIMEOUT_SECONDS: "${PROVIDER_TOTAL_TIMEOUT_SECONDS:-60}"
+  GENERATION_TIMEOUT_SECONDS: "${GENERATION_TIMEOUT_SECONDS:-80}"
+  RETRY_ATTEMPTS: "${RETRY_ATTEMPTS:-2}"
+  RETRY_BASE_DELAY_SECONDS: "${RETRY_BASE_DELAY_SECONDS:-0.25}"
+  RETRIEVAL_TOP_K: "${RETRIEVAL_TOP_K:-4}"
+  MINIMUM_RELEVANCE_SCORE: "${MINIMUM_RELEVANCE_SCORE:-0.2}"
+  CHUNK_SIZE: "${CHUNK_SIZE:-900}"
+  CHUNK_OVERLAP: "${CHUNK_OVERLAP:-140}"
+  MAX_CONTEXT_CHARACTERS: "${MAX_CONTEXT_CHARACTERS:-8000}"
+  MAX_PROMPT_CHARACTERS: "${MAX_PROMPT_CHARACTERS:-12000}"
+  MAX_PROMPT_UTF8_BYTES: "${MAX_PROMPT_UTF8_BYTES:-18000}"
+  MAX_UPLOAD_BYTES: "${MAX_UPLOAD_BYTES:-10000000}"
+  MAX_DOCUMENT_CHARACTERS: "${MAX_DOCUMENT_CHARACTERS:-2000000}"
+  MAX_DOCUMENT_CHUNKS: "${MAX_DOCUMENT_CHUNKS:-2500}"
+  MAX_PDF_PAGES: "${MAX_PDF_PAGES:-500}"
+  MAX_REQUEST_BODY_BYTES: "${MAX_REQUEST_BODY_BYTES:-5000000}"
+  EMBEDDING_BATCH_SIZE: "${EMBEDDING_BATCH_SIZE:-64}"
+  EMBEDDING_CONCURRENCY: "${EMBEDDING_CONCURRENCY:-2}"
+  RETRIEVAL_CONCURRENCY: "${RETRIEVAL_CONCURRENCY:-4}"
+  INGESTION_CONCURRENCY: "${INGESTION_CONCURRENCY:-2}"
+  TEMPERATURE: "${TEMPERATURE:-0.2}"
+  TOP_P: "${TOP_P:-0.9}"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: "${APP_IMAGE:-wk16-agentic-ai:local}"
+    init: true
+    restart: unless-stopped
+    command:
+      - uvicorn
+      - app.main:app
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+    environment: *backend-environment
+    ports:
+      - "127.0.0.1:${BACKEND_PORT:-8000}:8000"
+    volumes:
+      - model_cache:/home/appuser/.cache
+    depends_on:
+      qdrant:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      vllm:
+        condition: service_healthy
+        required: false
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)"
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    stop_grace_period: 30s
+
+  ui:
+    image: "${APP_IMAGE:-wk16-agentic-ai:local}"
+    init: true
+    restart: unless-stopped
+    command:
+      - streamlit
+      - run
+      - ui/streamlit_app.py
+      - --server.address=0.0.0.0
+      - --server.port=8501
+      - --server.headless=true
+    environment:
+      BACKEND_URL: "${BACKEND_URL:-http://backend:8000}"
+      BACKEND_API_KEY: "${APP_API_KEY:-}"
+    ports:
+      - "127.0.0.1:${UI_PORT:-8501}:8501"
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8501/_stcore/health', timeout=3)"
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    stop_grace_period: 20s
+
+  qdrant:
+    image: qdrant/qdrant:v1.15.4
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${QDRANT_PORT:-6333}:6333"
+      - "127.0.0.1:${QDRANT_GRPC_PORT:-6334}:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c ':> /dev/tcp/127.0.0.1/6333'"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  redis:
+    image: redis:7.4-alpine
+    restart: unless-stopped
+    command:
+      - redis-server
+      - --appendonly
+      - "yes"
+      - --save
+      - "60"
+      - "1000"
+    ports:
+      - "127.0.0.1:${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+
+  vllm:
+    profiles: ["local-llm"]
+    image: vllm/vllm-openai:v0.10.2
+    restart: unless-stopped
+    ipc: host
+    shm_size: "2gb"
+    environment:
+      HF_TOKEN: "${HF_TOKEN:-}"
+      HF_HOME: /root/.cache/huggingface
+    command:
+      - --model
+      - "${VLLM_MODEL:-Qwen/Qwen2.5-1.5B-Instruct}"
+      - --served-model-name
+      - "${VLLM_SERVED_MODEL_NAME:-local-model}"
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+      - --dtype
+      - "${VLLM_DTYPE:-auto}"
+      - --max-model-len
+      - "${VLLM_MAX_MODEL_LEN:-32768}"
+      - --gpu-memory-utilization
+      - "${VLLM_GPU_MEMORY_UTILIZATION:-0.85}"
+      - --enable-auto-tool-choice
+      - --tool-call-parser
+      - hermes
+    ports:
+      - "127.0.0.1:${VLLM_PORT:-8001}:8000"
+    volumes:
+      - huggingface_cache:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=5)"
+      interval: 30s
+      timeout: 10s
+      retries: 20
+      start_period: 180s
+    stop_grace_period: 60s
+
+volumes:
+  model_cache:
+  qdrant_data:
+  redis_data:
+  huggingface_cache:

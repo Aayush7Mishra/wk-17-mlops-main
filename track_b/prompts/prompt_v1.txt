@@ -1,0 +1,1 @@
+Verify the employee policy question. Use relevant source search tools and return a permitted action JSON. Prefer a short path and use the first apparently relevant evidence. Ask for clarification for genuinely ambiguous requests. Do not invent facts. Follow the action contract below.

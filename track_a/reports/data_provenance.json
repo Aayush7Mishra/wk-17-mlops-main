@@ -1,0 +1,13 @@
+{
+  "publisher": "IBM",
+  "dataset": "Telco Customer Churn (fictional sample customers)",
+  "source_url": "https://raw.githubusercontent.com/IBM/telco-customer-churn-on-icp4d/master/data/Telco-Customer-Churn.csv",
+  "sha256": "16320c9c1ec72448db59aa0a26a0b95401046bef5d02fd3aeb906448e3055e91",
+  "bytes": 970457,
+  "rows": 7043,
+  "columns": 21,
+  "churn_count": 1869,
+  "churn_rate": 0.2653698707936959,
+  "missing_total_charges": 11,
+  "preprocessing": "TotalCharges blanks -> NaN; train-only median imputation; ID excluded"
+}

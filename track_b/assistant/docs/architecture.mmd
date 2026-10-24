@@ -1,0 +1,32 @@
+flowchart TD
+    U[User] --> UI[W15 Streamlit UI]
+    UI --> CHAT[W15 chat API]
+    CHAT --> BASE[RAG + tools + provider fallback + cache]
+    BASE --> Q[Qdrant / memory, Redis / memory]
+    U --> CLI[Verification CLI]
+    U --> API[POST /api/v1/verify]
+    API --> AUTH[Authentication + rate limit + concurrency bound]
+    CLI --> LOOP
+    AUTH --> LOOP[Bounded VerificationAgent loop]
+    LOOP --> CTX[Structured notes + compact observations]
+    CTX --> MODEL[OpenAI-compatible planner]
+    CTX -. explicit regression mode .-> SIM[Handwritten OfflinePolicy]
+    MODEL --> ACTION{Next model-selected action}
+    SIM --> ACTION
+    ACTION -->|search| TOOL[Validated bounded tool call]
+    TOOL --> HB[Handbook collection]
+    TOOL --> REG[Policy registry collection]
+    HB --> OBS[Result / error observation]
+    REG --> OBS
+    OBS --> NOTES[Deduplicate + cap + excerpt]
+    NOTES --> LOOP
+    ACTION -->|finish| GUARD[Citation + provenance + authority checks]
+    GUARD -->|rejected with feedback| LOOP
+    GUARD -->|verified or abstained| OUT[Structured result]
+    ACTION -->|clarify| OUT
+    LOOP -->|step/token budget or model error| OUT
+    LOOP --> TRACE[External full trace + usage + failures]
+    EVAL[Custom evaluation harness] --> LOOP
+    OUT --> EVAL
+    TRACE --> EVAL
+    EVAL --> REPORT[JSON / JSONL / Markdown results]

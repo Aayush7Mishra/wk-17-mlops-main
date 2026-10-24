@@ -1,0 +1,84 @@
+{
+  "candidate_runs": [
+    {
+      "run_id": "0839ff005a284f7b977a5b1b1c111666",
+      "status": "FINISHED",
+      "model_files": [
+        "model/MLmodel",
+        "model/conda.yaml",
+        "model/input_example.json",
+        "model/model.pkl",
+        "model/python_env.yaml",
+        "model/registered_model_meta",
+        "model/requirements.txt",
+        "model/serving_input_example.json"
+      ],
+      "figures": [
+        "figures/forest_depth8_test_confusion.png",
+        "figures/forest_depth8_test_roc.png",
+        "figures/forest_depth8_validation_confusion.png",
+        "figures/forest_depth8_validation_roc.png"
+      ]
+    },
+    {
+      "run_id": "b373594e5eb840f78f4e74a8de6c8f6c",
+      "status": "FINISHED",
+      "model_files": [
+        "model/MLmodel",
+        "model/conda.yaml",
+        "model/input_example.json",
+        "model/model.pkl",
+        "model/python_env.yaml",
+        "model/requirements.txt",
+        "model/serving_input_example.json"
+      ],
+      "figures": [
+        "figures/logistic_balanced_c1_validation_confusion.png",
+        "figures/logistic_balanced_c1_validation_roc.png"
+      ]
+    },
+    {
+      "run_id": "df8b771b454247d2a47eae2ac9785f0b",
+      "status": "FINISHED",
+      "model_files": [
+        "model/MLmodel",
+        "model/conda.yaml",
+        "model/input_example.json",
+        "model/model.pkl",
+        "model/python_env.yaml",
+        "model/requirements.txt",
+        "model/serving_input_example.json"
+      ],
+      "figures": [
+        "figures/logistic_c0.1_validation_confusion.png",
+        "figures/logistic_c0.1_validation_roc.png"
+      ]
+    }
+  ],
+  "monitoring_artifacts_verified": true,
+  "http_api": {
+    "health": {
+      "status": "ok",
+      "model_name": "telco-churn",
+      "model_version": 1
+    },
+    "prediction_status": 200,
+    "response": {
+      "model_name": "telco-churn",
+      "model_version": 1,
+      "threshold": 0.5,
+      "predictions": [
+        {
+          "churn": false,
+          "probability": 0.05379751260830727
+        },
+        {
+          "churn": true,
+          "probability": 0.7784444334149897
+        }
+      ]
+    },
+    "empty_batch_status": 422,
+    "probabilities_match_registry_model": true
+  }
+}

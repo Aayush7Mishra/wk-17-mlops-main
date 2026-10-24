@@ -1,0 +1,32 @@
+{
+  "executed_at_utc": "2026-10-21T10:16:46.936646+00:00",
+  "setup": "Copied only source, tests, scripts, pyproject.toml, uv.lock and .python-version into an empty temporary directory. No environment, cached CSV, registry or generated reports copied.",
+  "commands": [
+    {
+      "command": "uv sync --frozen",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --frozen telco-train",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --frozen telco-monitor",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --frozen pytest -q",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --frozen python scripts/verify_runtime.py",
+      "exit_code": 0
+    }
+  ],
+  "lock_sha256": "ed532f9ff1c18e2cfd4cfc0e6d7b5b975dcbcaa59ae25a664d6926085dc79926",
+  "test_metrics_identical": true,
+  "maximum_absolute_drift_score_difference": 8.858365430075565e-15,
+  "drift_decisions_identical": true,
+  "unit_tests_passed": 9,
+  "live_http_verification_passed": true
+}

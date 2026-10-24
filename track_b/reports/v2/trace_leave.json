@@ -1,0 +1,593 @@
+{
+  "query": "How many paid annual leave days do full-time employees receive?",
+  "status": "budget_exhausted",
+  "answer": "Verification stopped at the configured step limit.",
+  "citations": [],
+  "steps": 6,
+  "trace": [
+    {
+      "step": 1,
+      "context": {
+        "query": "How many paid annual leave days do full-time employees receive?",
+        "notes": [],
+        "history": [],
+        "remaining_steps": 6,
+        "max_steps": 6
+      },
+      "decision": {
+        "action": "search_policy_registry",
+        "arguments": {
+          "query": "full-time employee annual leave"
+        }
+      },
+      "raw_response": "{\"action\":\"search_policy_registry\",\"arguments\":{\"query\":\"full-time employee annual leave\"}}",
+      "usage": {
+        "input_tokens": 469,
+        "output_tokens": 18,
+        "estimated": false
+      },
+      "tool_call": {
+        "name": "search_policy_registry",
+        "arguments": {
+          "query": "full-time employee annual leave"
+        }
+      },
+      "raw_tool_result": {
+        "documents": [
+          {
+            "id": "registry-carryover",
+            "collection": "registry",
+            "publisher": "hr-policy-office",
+            "topic": "carryover",
+            "version": "2026-01",
+            "authoritative": true,
+            "current": true,
+            "title": "Annual leave carryover registry",
+            "text": "The annual leave carryover maximum is 5 unused days at the end of a calendar year.",
+            "facts": {
+              "carryover_days": "up to 5 unused days"
+            },
+            "relevance": 2
+          },
+          {
+            "id": "registry-leave-2026",
+            "collection": "registry",
+            "publisher": "hr-policy-office",
+            "topic": "leave",
+            "version": "2026-01",
+            "authoritative": true,
+            "current": true,
+            "title": "Current annual leave policy",
+            "text": "The current 2026 annual leave policy grants employees 22 paid days per calendar year. This replaces the archived 2024 handbook entitlement of 20 days.",
+            "facts": {
+              "annual_leave_days": "22 paid days per calendar year"
+            },
+            "relevance": 2
+          }
+        ]
+      },
+      "observation": {
+        "ok": true,
+        "source_ids": [
+          "registry-carryover",
+          "registry-leave-2026"
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "context": {
+        "query": "How many paid annual leave days do full-time employees receive?",
+        "notes": [
+          {
+            "id": "registry-carryover",
+            "collection": "registry",
+            "publisher": "hr-policy-office",
+            "topic": "carryover",
+            "version": "2026-01",
+            "authoritative": true,
+            "current": true,
+            "title": "Annual leave carryover registry",
+            "facts": {
+              "carryover_days": "up to 5 unused days"
+            },
+            "relevance": 2,
+            "excerpt": "The annual leave carryover maximum is 5 unused days at the end of a calendar year."
+          },
+          {
+            "id": "registry-leave-2026",
+            "collection": "registry",
+            "publisher": "hr-policy-office",
+            "topic": "leave",
+            "version": "2026-01",
+            "authoritative": true,
+            "current": true,
+            "title": "Current annual leave policy",
+            "facts": {
+              "annual_leave_days": "22 paid days per calendar year"
+            },
+            "relevance": 2,
+            "excerpt": "The current 2026 annual leave policy grants employees 22 paid days per calendar year. This replaces the archived 2024 handbook entitlement of 20 days."
+          }
+        ],
+        "history": [
+          {
+            "action": "search_policy_registry",
+            "ok": true,
+            "source_ids": [
+              "registry-carryover",
+              "registry-leave-2026"
+            ]
+          }
+        ],
+        "remaining_steps": 5,
+        "max_steps": 6
+      },
+      "decision": {
+        "action": "clarify",
+        "arguments": {
+          "question": "How many paid annual leave days do full-time employees receive based on the current policy? Does this align with the previous handbook's entitlement of 20 days?"
+        }
+      },
+      "raw_response": "{\"action\":\"clarify\",\"arguments\":{\"question\":\"How many paid annual leave days do full-time employees receive based on the current policy? Does this align with the previous handbook's entitlement of 20 days?\"}}",
+      "usage": {
+        "input_tokens": 743,
+        "output_tokens": 44,
+        "estimated": false
+      },
+      "observation": {
+        "ok": false,
+        "error": "clarification requires a concise question"
+      }
+    },
+    {
+      "step": 3,
+      "context": {
+        "query": "How many paid annual leave days do full-time employees receive?",
+        "notes": [
+          {
+            "id": "registry-carryover",
+            "collection": "registry",
+            "publisher": "hr-policy-office",
+            "topic": "carryover",
+            "version": "2026-01",
+            "authoritative": true,
+            "current": true,
+            "title": "Annual leave carryover registry",
+            "facts": {
+              "carryover_days": "up to 5 unused days"
+            },
+            "relevance": 2,
+            "excerpt": "The annual leave carryover maximum is 5 unused days at the end of a calendar year."
+          },
+          {
+            "id": "registry-leave-2026",
+            "collection": "registry",
+            "publisher": "hr-policy-office",
+            "topic": "leave",
+            "version": "2026-01",
+            "authoritative": true,
+            "current": true,
+            "title": "Current annual leave policy",
+            "facts": {
+              "annual_leave_days": "22 paid days per calendar year"
+            },
+            "relevance": 2,
+            "excerpt": "The current 2026 annual leave policy grants employees 22 paid days per calendar year. This replaces the archived 2024 handbook entitlement of 20 days."
+          }
+        ],
+        "history": [
+          {
+            "action": "search_policy_registry",
+            "ok": true,
+            "source_ids": [
+              "registry-carryover",
+              "registry-leave-2026"
+            ]
+          },
+          {
+            "action": "clarify",
+            "ok": false,
+            "error": "clarification requires a concise question"
+          }
+        ],
+        "remaining_steps": 4,
+        "max_steps": 6
+      },
+      "decision": {
+        "action": "search_policy_registry",
+        "arguments": {
+          "query": "full-time employees paid annual leave days"
+        }
+      },
+      "raw_response": "{\"action\":\"search_policy_registry\",\"arguments\":{\"query\":\"full-time employees paid annual leave days\"}}",
+      "usage": {
+        "input_tokens": 767,
+        "output_tokens": 20,
+        "estimated": false
+      },
+      "tool_call": {
+        "name": "search_policy_registry",
+        "arguments": {
+          "query": "full-time employees paid annual leave days"
+        }
+      },
+      "raw_tool_result": {
+        "documents": [
+          {
+            "id": "registry-leave-2026",
+            "collection": "registry",
+            "publisher": "hr-policy-office",
+            "topic": "leave",
+            "version": "2026-01",
+            "authoritative": true,
+            "current": true,
+            "title": "Current annual leave policy",
+            "text": "The current 2026 annual leave policy grants employees 22 paid days per calendar year. This replaces the archived 2024 handbook entitlement of 20 days.",
+            "facts": {
+              "annual_leave_days": "22 paid days per calendar year"
+            },
+            "relevance": 4
+          },
+          {
+            "id": "registry-carryover",
+            "collection": "registry",
+            "publisher": "hr-policy-office",
+            "topic": "carryover",
+            "version": "2026-01",
+            "authoritative": true,
+            "current": true,
+            "title": "Annual leave carryover registry",
+            "text": "The annual leave carryover maximum is 5 unused days at the end of a calendar year.",
+            "facts": {
+              "carryover_days": "up to 5 unused days"
+            },
+            "relevance": 3
+          }
+        ]
+      },
+      "observation": {
+        "ok": true,
+        "source_ids": [
+          "registry-leave-2026",
+          "registry-carryover"
+        ]
+      }
+    },
+    {
+      "step": 4,
+      "context": {
+        "query": "How many paid annual leave days do full-time employees receive?",
+        "notes": [
+          {
+            "id": "registry-leave-2026",
+            "collection": "registry",
+            "publisher": "hr-policy-office",
+            "topic": "leave",
+            "version": "2026-01",
+            "authoritative": true,
+            "current": true,
+            "title": "Current annual leave policy",
+            "facts": {
+              "annual_leave_days": "22 paid days per calendar year"
+            },
+            "relevance": 4,
+            "excerpt": "The current 2026 annual leave policy grants employees 22 paid days per calendar year. This replaces the archived 2024 handbook entitlement of 20 days."
+          },
+          {
+            "id": "registry-carryover",
+            "collection": "registry",
+            "publisher": "hr-policy-office",
+            "topic": "carryover",
+            "version": "2026-01",
+            "authoritative": true,
+            "current": true,
+            "title": "Annual leave carryover registry",
+            "facts": {
+              "carryover_days": "up to 5 unused days"
+            },
+            "relevance": 3,
+            "excerpt": "The annual leave carryover maximum is 5 unused days at the end of a calendar year."
+          }
+        ],
+        "history": [
+          {
+            "action": "search_policy_registry",
+            "ok": true,
+            "source_ids": [
+              "registry-carryover",
+              "registry-leave-2026"
+            ]
+          },
+          {
+            "action": "clarify",
+            "ok": false,
+            "error": "clarification requires a concise question"
+          },
+          {
+            "action": "search_policy_registry",
+            "ok": true,
+            "source_ids": [
+              "registry-leave-2026",
+              "registry-carryover"
+            ]
+          }
+        ],
+        "remaining_steps": 3,
+        "max_steps": 6
+      },
+      "decision": {
+        "action": "finish",
+        "status": "verified",
+        "claims": [
+          {
+            "key": "annual_leave_days",
+            "value": "22 paid days per calendar year",
+            "citations": [
+              "registry-leave-2026.id",
+              "registry-carryover.id"
+            ]
+          }
+        ]
+      },
+      "raw_response": "{\"action\":\"finish\",\"status\":\"verified\",\"claims\":[{\"key\":\"annual_leave_days\",\"value\":\"22 paid days per calendar year\",\"citations\":[\"registry-leave-2026.id\",\"registry-carryover.id\"]}]}",
+      "usage": {
+        "input_tokens": 800,
+        "output_tokens": 48,
+        "estimated": false
+      },
+      "observation": {
+        "ok": false,
+        "error": "unobserved citation"
+      }
+    },
+    {
+      "step": 5,
+      "context": {
+        "query": "How many paid annual leave days do full-time employees receive?",
+        "notes": [
+          {
+            "id": "registry-leave-2026",
+            "collection": "registry",
+            "publisher": "hr-policy-office",
+            "topic": "leave",
+            "version": "2026-01",
+            "authoritative": true,
+            "current": true,
+            "title": "Current annual leave policy",
+            "facts": {
+              "annual_leave_days": "22 paid days per calendar year"
+            },
+            "relevance": 4,
+            "excerpt": "The current 2026 annual leave policy grants employees 22 paid days per calendar year. This replaces the archived 2024 handbook entitlement of 20 days."
+          },
+          {
+            "id": "registry-carryover",
+            "collection": "registry",
+            "publisher": "hr-policy-office",
+            "topic": "carryover",
+            "version": "2026-01",
+            "authoritative": true,
+            "current": true,
+            "title": "Annual leave carryover registry",
+            "facts": {
+              "carryover_days": "up to 5 unused days"
+            },
+            "relevance": 3,
+            "excerpt": "The annual leave carryover maximum is 5 unused days at the end of a calendar year."
+          }
+        ],
+        "history": [
+          {
+            "action": "search_policy_registry",
+            "ok": true,
+            "source_ids": [
+              "registry-carryover",
+              "registry-leave-2026"
+            ]
+          },
+          {
+            "action": "clarify",
+            "ok": false,
+            "error": "clarification requires a concise question"
+          },
+          {
+            "action": "search_policy_registry",
+            "ok": true,
+            "source_ids": [
+              "registry-leave-2026",
+              "registry-carryover"
+            ]
+          },
+          {
+            "action": "finish",
+            "ok": false,
+            "error": "unobserved citation"
+          }
+        ],
+        "remaining_steps": 2,
+        "max_steps": 6
+      },
+      "decision": {
+        "action": "search_policy_registry",
+        "arguments": {
+          "query": "full-time employees paid annual leave days"
+        }
+      },
+      "raw_response": "{\"action\":\"search_policy_registry\",\"arguments\":{\"query\":\"full-time employees paid annual leave days\"}}",
+      "usage": {
+        "input_tokens": 821,
+        "output_tokens": 20,
+        "estimated": false
+      },
+      "tool_call": {
+        "name": "search_policy_registry",
+        "arguments": {
+          "query": "full-time employees paid annual leave days"
+        }
+      },
+      "raw_tool_result": {
+        "documents": [
+          {
+            "id": "registry-leave-2026",
+            "collection": "registry",
+            "publisher": "hr-policy-office",
+            "topic": "leave",
+            "version": "2026-01",
+            "authoritative": true,
+            "current": true,
+            "title": "Current annual leave policy",
+            "text": "The current 2026 annual leave policy grants employees 22 paid days per calendar year. This replaces the archived 2024 handbook entitlement of 20 days.",
+            "facts": {
+              "annual_leave_days": "22 paid days per calendar year"
+            },
+            "relevance": 4
+          },
+          {
+            "id": "registry-carryover",
+            "collection": "registry",
+            "publisher": "hr-policy-office",
+            "topic": "carryover",
+            "version": "2026-01",
+            "authoritative": true,
+            "current": true,
+            "title": "Annual leave carryover registry",
+            "text": "The annual leave carryover maximum is 5 unused days at the end of a calendar year.",
+            "facts": {
+              "carryover_days": "up to 5 unused days"
+            },
+            "relevance": 3
+          }
+        ]
+      },
+      "observation": {
+        "ok": true,
+        "source_ids": [
+          "registry-leave-2026",
+          "registry-carryover"
+        ]
+      }
+    },
+    {
+      "step": 6,
+      "context": {
+        "query": "How many paid annual leave days do full-time employees receive?",
+        "notes": [
+          {
+            "id": "registry-leave-2026",
+            "collection": "registry",
+            "publisher": "hr-policy-office",
+            "topic": "leave",
+            "version": "2026-01",
+            "authoritative": true,
+            "current": true,
+            "title": "Current annual leave policy",
+            "facts": {
+              "annual_leave_days": "22 paid days per calendar year"
+            },
+            "relevance": 4,
+            "excerpt": "The current 2026 annual leave policy grants employees 22 paid days per calendar year. This replaces the archived 2024 handbook entitlement of 20 days."
+          },
+          {
+            "id": "registry-carryover",
+            "collection": "registry",
+            "publisher": "hr-policy-office",
+            "topic": "carryover",
+            "version": "2026-01",
+            "authoritative": true,
+            "current": true,
+            "title": "Annual leave carryover registry",
+            "facts": {
+              "carryover_days": "up to 5 unused days"
+            },
+            "relevance": 3,
+            "excerpt": "The annual leave carryover maximum is 5 unused days at the end of a calendar year."
+          }
+        ],
+        "history": [
+          {
+            "action": "search_policy_registry",
+            "ok": true,
+            "source_ids": [
+              "registry-carryover",
+              "registry-leave-2026"
+            ]
+          },
+          {
+            "action": "clarify",
+            "ok": false,
+            "error": "clarification requires a concise question"
+          },
+          {
+            "action": "search_policy_registry",
+            "ok": true,
+            "source_ids": [
+              "registry-leave-2026",
+              "registry-carryover"
+            ]
+          },
+          {
+            "action": "finish",
+            "ok": false,
+            "error": "unobserved citation"
+          },
+          {
+            "action": "search_policy_registry",
+            "ok": true,
+            "source_ids": [
+              "registry-leave-2026",
+              "registry-carryover"
+            ]
+          }
+        ],
+        "remaining_steps": 1,
+        "max_steps": 6
+      },
+      "decision": {
+        "action": "clarify",
+        "arguments": {
+          "question": "What is the current annual leave policy for full-time employees?"
+        }
+      },
+      "raw_response": "{\"action\":\"clarify\",\"arguments\":{\"question\":\"What is the current annual leave policy for full-time employees?\"}}",
+      "usage": {
+        "input_tokens": 854,
+        "output_tokens": 24,
+        "estimated": false
+      },
+      "observation": {
+        "ok": false,
+        "error": "clarification requires a concise question"
+      }
+    }
+  ],
+  "usage": {
+    "input_tokens": 4454,
+    "output_tokens": 174,
+    "total_tokens": 4628,
+    "estimated": false,
+    "complete": true,
+    "cost_usd": null,
+    "basis": "provider_reported"
+  },
+  "failure_events": [
+    {
+      "step": 2,
+      "category": "soft_failure",
+      "message": "clarification requires a concise question"
+    },
+    {
+      "step": 4,
+      "category": "soft_failure",
+      "message": "unobserved citation"
+    },
+    {
+      "step": 6,
+      "category": "soft_failure",
+      "message": "clarification requires a concise question"
+    }
+  ],
+  "model_mode": "live",
+  "latency_ms": 2034.0567420003026,
+  "claims": []
+}

@@ -1,0 +1,285 @@
+{
+  "reference_rows": 4930,
+  "current_rows": 2113,
+  "columns": {
+    "tenure": {
+      "score": 0.018301722279402,
+      "method": "wasserstein",
+      "threshold": 0.1,
+      "drift_detected": false
+    },
+    "MonthlyCharges": {
+      "score": 0.9623582277188749,
+      "method": "wasserstein",
+      "threshold": 0.1,
+      "drift_detected": true
+    },
+    "TotalCharges": {
+      "score": 0.04167054865069652,
+      "method": "wasserstein",
+      "threshold": 0.1,
+      "drift_detected": false
+    },
+    "gender": {
+      "score": 0.004996060243100251,
+      "method": "jensenshannon",
+      "threshold": 0.1,
+      "drift_detected": false
+    },
+    "SeniorCitizen": {
+      "score": 0.003485264271045007,
+      "method": "jensenshannon",
+      "threshold": 0.1,
+      "drift_detected": false
+    },
+    "Partner": {
+      "score": 0.004473036288511253,
+      "method": "jensenshannon",
+      "threshold": 0.1,
+      "drift_detected": false
+    },
+    "Dependents": {
+      "score": 0.005196022151707271,
+      "method": "jensenshannon",
+      "threshold": 0.1,
+      "drift_detected": false
+    },
+    "PhoneService": {
+      "score": 0.015225350989601049,
+      "method": "jensenshannon",
+      "threshold": 0.1,
+      "drift_detected": false
+    },
+    "MultipleLines": {
+      "score": 0.01722377983929771,
+      "method": "jensenshannon",
+      "threshold": 0.1,
+      "drift_detected": false
+    },
+    "InternetService": {
+      "score": 0.005302215551648271,
+      "method": "jensenshannon",
+      "threshold": 0.1,
+      "drift_detected": false
+    },
+    "OnlineSecurity": {
+      "score": 0.005424664612301112,
+      "method": "jensenshannon",
+      "threshold": 0.1,
+      "drift_detected": false
+    },
+    "OnlineBackup": {
+      "score": 0.010704292906787554,
+      "method": "jensenshannon",
+      "threshold": 0.1,
+      "drift_detected": false
+    },
+    "DeviceProtection": {
+      "score": 0.014471301867288604,
+      "method": "jensenshannon",
+      "threshold": 0.1,
+      "drift_detected": false
+    },
+    "TechSupport": {
+      "score": 0.011299622122913942,
+      "method": "jensenshannon",
+      "threshold": 0.1,
+      "drift_detected": false
+    },
+    "StreamingTV": {
+      "score": 0.02489448151075452,
+      "method": "jensenshannon",
+      "threshold": 0.1,
+      "drift_detected": false
+    },
+    "StreamingMovies": {
+      "score": 0.010022751272528108,
+      "method": "jensenshannon",
+      "threshold": 0.1,
+      "drift_detected": false
+    },
+    "Contract": {
+      "score": 0.32636930535915964,
+      "method": "jensenshannon",
+      "threshold": 0.1,
+      "drift_detected": true
+    },
+    "PaperlessBilling": {
+      "score": 0.0001747295815899024,
+      "method": "jensenshannon",
+      "threshold": 0.1,
+      "drift_detected": false
+    },
+    "PaymentMethod": {
+      "score": 0.003922671535967358,
+      "method": "jensenshannon",
+      "threshold": 0.1,
+      "drift_detected": false
+    },
+    "Churn": {
+      "score": 0.1445056999336713,
+      "method": "jensenshannon",
+      "threshold": 0.1,
+      "drift_detected": true
+    }
+  },
+  "drifted_features": [
+    "MonthlyCharges",
+    "Contract"
+  ],
+  "target_drift": true,
+  "reference_churn_rate": 0.2653144016227181,
+  "current_churn_rate": 0.46095598674869853,
+  "reference_monthly_charges_mean": 64.95008113590264,
+  "current_monthly_charges_mean": 94.0523773936653,
+  "custom_absolute_mean_charge_shift": 29.10229625776266,
+  "custom_test_passed": false,
+  "reference_month_to_month_share": 0.5484787018255578,
+  "current_month_to_month_share": 0.934690014197823,
+  "investigate_and_retrain_recommended": true,
+  "run_id": "796eeb40e3534b90893948c272227e91",
+  "seed": 42,
+  "perturbations": {
+    "MonthlyCharges": "add Normal(mean=30, sd=5) to every incoming row",
+    "Contract": "set 85% Bernoulli-selected rows to Month-to-month",
+    "Churn": "flip Bernoulli(0.25)-selected non-churn labels to churn"
+  },
+  "control": {
+    "reference_rows": 4930,
+    "current_rows": 2113,
+    "columns": {
+      "tenure": {
+        "score": 0.018301722279402,
+        "method": "wasserstein",
+        "threshold": 0.1,
+        "drift_detected": false
+      },
+      "MonthlyCharges": {
+        "score": 0.027789115079358474,
+        "method": "wasserstein",
+        "threshold": 0.1,
+        "drift_detected": false
+      },
+      "TotalCharges": {
+        "score": 0.04167054865069652,
+        "method": "wasserstein",
+        "threshold": 0.1,
+        "drift_detected": false
+      },
+      "gender": {
+        "score": 0.004996060243100251,
+        "method": "jensenshannon",
+        "threshold": 0.1,
+        "drift_detected": false
+      },
+      "SeniorCitizen": {
+        "score": 0.003485264271045007,
+        "method": "jensenshannon",
+        "threshold": 0.1,
+        "drift_detected": false
+      },
+      "Partner": {
+        "score": 0.004473036288511253,
+        "method": "jensenshannon",
+        "threshold": 0.1,
+        "drift_detected": false
+      },
+      "Dependents": {
+        "score": 0.005196022151707271,
+        "method": "jensenshannon",
+        "threshold": 0.1,
+        "drift_detected": false
+      },
+      "PhoneService": {
+        "score": 0.015225350989601049,
+        "method": "jensenshannon",
+        "threshold": 0.1,
+        "drift_detected": false
+      },
+      "MultipleLines": {
+        "score": 0.01722377983929771,
+        "method": "jensenshannon",
+        "threshold": 0.1,
+        "drift_detected": false
+      },
+      "InternetService": {
+        "score": 0.005302215551648271,
+        "method": "jensenshannon",
+        "threshold": 0.1,
+        "drift_detected": false
+      },
+      "OnlineSecurity": {
+        "score": 0.005424664612301112,
+        "method": "jensenshannon",
+        "threshold": 0.1,
+        "drift_detected": false
+      },
+      "OnlineBackup": {
+        "score": 0.010704292906787554,
+        "method": "jensenshannon",
+        "threshold": 0.1,
+        "drift_detected": false
+      },
+      "DeviceProtection": {
+        "score": 0.014471301867288604,
+        "method": "jensenshannon",
+        "threshold": 0.1,
+        "drift_detected": false
+      },
+      "TechSupport": {
+        "score": 0.011299622122913942,
+        "method": "jensenshannon",
+        "threshold": 0.1,
+        "drift_detected": false
+      },
+      "StreamingTV": {
+        "score": 0.02489448151075452,
+        "method": "jensenshannon",
+        "threshold": 0.1,
+        "drift_detected": false
+      },
+      "StreamingMovies": {
+        "score": 0.010022751272528108,
+        "method": "jensenshannon",
+        "threshold": 0.1,
+        "drift_detected": false
+      },
+      "Contract": {
+        "score": 0.004122401776045487,
+        "method": "jensenshannon",
+        "threshold": 0.1,
+        "drift_detected": false
+      },
+      "PaperlessBilling": {
+        "score": 0.0001747295815899024,
+        "method": "jensenshannon",
+        "threshold": 0.1,
+        "drift_detected": false
+      },
+      "PaymentMethod": {
+        "score": 0.003922671535967358,
+        "method": "jensenshannon",
+        "threshold": 0.1,
+        "drift_detected": false
+      },
+      "Churn": {
+        "score": 0.0001480421480134364,
+        "method": "jensenshannon",
+        "threshold": 0.1,
+        "drift_detected": false
+      }
+    },
+    "drifted_features": [],
+    "target_drift": false,
+    "reference_churn_rate": 0.2653144016227181,
+    "current_churn_rate": 0.26549929010885,
+    "reference_monthly_charges_mean": 64.95008113590264,
+    "current_monthly_charges_mean": 64.32214860388075,
+    "custom_absolute_mean_charge_shift": 0.6279325320218874,
+    "custom_test_passed": true,
+    "reference_month_to_month_share": 0.5484787018255578,
+    "current_month_to_month_share": 0.5541883577851396,
+    "investigate_and_retrain_recommended": false
+  },
+  "action": "Investigate billing/input changes and label quality; collect real delayed outcomes, evaluate the deployed model on recent labeled data, and retrain a candidate only after validation. Drift alone does not prove performance degradation; do not automatically promote a model trained on synthetic labels."
+}

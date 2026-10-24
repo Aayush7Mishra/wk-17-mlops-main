@@ -1,0 +1,28 @@
+{
+  "model": "logistic_c0.1",
+  "run_id": "df8b771b454247d2a47eae2ac9785f0b",
+  "validation_accuracy": 0.8034066713981547,
+  "validation_precision": 0.6644067796610169,
+  "validation_recall": 0.5240641711229946,
+  "validation_f1": 0.585949177877429,
+  "validation_roc_auc": 0.8356338319253921,
+  "fit_seconds": 0.025978484999996,
+  "parameters": {
+    "C": 0.1,
+    "class_weight": null,
+    "dual": false,
+    "fit_intercept": true,
+    "intercept_scaling": 1,
+    "l1_ratio": null,
+    "max_iter": 1500,
+    "multi_class": "deprecated",
+    "n_jobs": null,
+    "penalty": "l2",
+    "random_state": 42,
+    "solver": "lbfgs",
+    "tol": 0.0001,
+    "verbose": 0,
+    "warm_start": false
+  },
+  "artifact_uri": "runs:/df8b771b454247d2a47eae2ac9785f0b/model"
+}

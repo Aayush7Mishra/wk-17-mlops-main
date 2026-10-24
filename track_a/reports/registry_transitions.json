@@ -1,0 +1,28 @@
+{
+  "model_name": "telco-churn",
+  "version": 1,
+  "run_id": "0839ff005a284f7b977a5b1b1c111666",
+  "model": "forest_depth8",
+  "model_uri": "models:/telco-churn@champion",
+  "selection_rule": "highest validation F1; validation ROC-AUC breaks ties",
+  "validation_f1": 0.6224156692056583,
+  "transitions": [
+    {
+      "stage": "Staging",
+      "observed_at": "2026-10-21T10:11:21.695556+00:00"
+    },
+    {
+      "stage": "Production",
+      "observed_at": "2026-10-21T10:11:21.705568+00:00"
+    }
+  ],
+  "final_stage": "Production",
+  "registry_load_verified": true,
+  "test_metrics": {
+    "accuracy": 0.7572746628814763,
+    "precision": 0.5290909090909091,
+    "recall": 0.7780748663101604,
+    "f1": 0.6298701298701299,
+    "roc_auc": 0.8430894623989253
+  }
+}

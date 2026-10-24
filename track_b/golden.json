@@ -1,0 +1,8 @@
+[
+  {"id":"leave","query":"How many paid annual leave days do full-time employees receive?","reference":"The current annual leave entitlement is 22 paid days per calendar year; the archived 20-day entitlement has been replaced.","status":"verified","fact_key":"annual_leave_days","fact_value":"22 paid days per calendar year"},
+  {"id":"carryover","query":"How many unused annual leave days can I carry over?","reference":"Employees may carry over up to 5 unused annual leave days.","status":"verified","fact_key":"carryover_days","fact_value":"up to 5 unused days"},
+  {"id":"remote","query":"How many remote work days can full-time employees take per week?","reference":"Full-time employees may work remotely 2 days per week.","status":"verified","fact_key":"remote_days","fact_value":"2 remote days per week for full-time employees"},
+  {"id":"contractor","query":"Does the remote work allowance apply to contractors?","reference":"Contractors have separate agreements not available here. Ask for the contractor's agreement or clarification; do not apply the full-time allowance.","status":"needs_clarification"},
+  {"id":"missing_policy","query":"What is the meal reimbursement allowance?","reference":"The meal allowance cannot be verified because there is no independent authoritative registry entry. Do not present 15 credits as verified policy.","status":"insufficient_evidence"},
+  {"id":"registry_outage","query":"How many annual leave days do full-time employees get?","failure":"registry_unavailable","reference":"The current annual leave entitlement cannot be verified while the policy registry is unavailable. Do not present the archived 20-day entitlement as current.","status":"insufficient_evidence"}
+]

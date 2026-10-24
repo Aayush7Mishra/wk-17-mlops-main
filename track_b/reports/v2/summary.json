@@ -1,0 +1,35 @@
+{
+  "version": "v2",
+  "run_id": "e936f07cba8748c2ada77f7976408671",
+  "model": "qwen2.5:1.5b",
+  "configuration": {
+    "max_steps": 6,
+    "top_k": 2,
+    "temperature": 0,
+    "max_tokens": 24000
+  },
+  "judge_model": "qwen2.5:3b",
+  "metrics": {
+    "task_completion_rate": 0.16666666666666666,
+    "tool_call_correctness": 1.0,
+    "mean_iterations": 5.0,
+    "decision_reason_coverage": 0.0,
+    "agent_tokens": 22151,
+    "judge_tokens": 7374,
+    "judge_errors": 0,
+    "token_accounting_complete": 1,
+    "pct_tests_passed": 8.333333333333334,
+    "case_pass_rate": 0.0,
+    "promoted": 0,
+    "mean_latency_ms": 1358.2574693334664,
+    "evidently_tests_passed": 1
+  },
+  "promotion": {
+    "promote": false,
+    "case_pass_rate": 0.0,
+    "reason": "regression gate failed"
+  },
+  "provider": "Ollama OpenAI-compatible local endpoint",
+  "usd_cost": null,
+  "cost_note": "Local compute, no per-token invoice; electricity/hardware not measured."
+}

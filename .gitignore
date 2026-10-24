@@ -1,0 +1,13 @@
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/.ruff_cache/
+**/.env
+**/mlruns/
+**/mlartifacts/
+**/*.db
+**/*.db-shm
+**/*.db-wal
+**/data/*.csv
+**/artifacts/
+**/.DS_Store

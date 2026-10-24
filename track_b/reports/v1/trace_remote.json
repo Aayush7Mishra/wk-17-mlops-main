@@ -1,0 +1,135 @@
+{
+  "query": "How many remote work days can full-time employees take per week?",
+  "status": "budget_exhausted",
+  "answer": "Verification stopped at the configured step limit.",
+  "citations": [],
+  "steps": 2,
+  "trace": [
+    {
+      "step": 1,
+      "context": {
+        "query": "How many remote work days can full-time employees take per week?",
+        "notes": [],
+        "history": [],
+        "remaining_steps": 2,
+        "max_steps": 2
+      },
+      "decision": {
+        "action": "search_handbook",
+        "arguments": {
+          "query": "remote work policy"
+        }
+      },
+      "raw_response": "{\n  \"action\": \"search_handbook\",\n  \"arguments\": {\n    \"query\": \"remote work policy\"\n  }\n}",
+      "usage": {
+        "input_tokens": 330,
+        "output_tokens": 28,
+        "estimated": false
+      },
+      "tool_call": {
+        "name": "search_handbook",
+        "arguments": {
+          "query": "remote work policy"
+        }
+      },
+      "raw_tool_result": {
+        "documents": [
+          {
+            "id": "handbook-remote",
+            "collection": "handbook",
+            "publisher": "people-handbook",
+            "topic": "remote",
+            "version": "2026-01",
+            "authoritative": false,
+            "current": true,
+            "title": "Employee remote work handbook",
+            "text": "Full-time employees may work remotely 2 days per week. Contractors have separate agreements not stored here.",
+            "facts": {
+              "remote_days": "2 remote days per week for full-time employees"
+            },
+            "relevance": 2
+          }
+        ]
+      },
+      "observation": {
+        "ok": true,
+        "source_ids": [
+          "handbook-remote"
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "context": {
+        "query": "How many remote work days can full-time employees take per week?",
+        "notes": [
+          {
+            "id": "handbook-remote",
+            "collection": "handbook",
+            "publisher": "people-handbook",
+            "topic": "remote",
+            "version": "2026-01",
+            "authoritative": false,
+            "current": true,
+            "title": "Employee remote work handbook",
+            "facts": {
+              "remote_days": "2 remote days per week for full-time employees"
+            },
+            "relevance": 2,
+            "excerpt": "Full-time employees may work remotely 2 days per week. Contractors have separate agreements not stored here."
+          }
+        ],
+        "history": [
+          {
+            "action": "search_handbook",
+            "ok": true,
+            "source_ids": [
+              "handbook-remote"
+            ]
+          }
+        ],
+        "remaining_steps": 1,
+        "max_steps": 2
+      },
+      "decision": {
+        "action": "finish",
+        "status": "verified",
+        "claims": [
+          {
+            "key": "remote_days",
+            "value": "2 remote days per week for full-time employees"
+          }
+        ]
+      },
+      "raw_response": "{\"action\":\"finish\",\"status\":\"verified\",\"claims\":[{\"key\":\"remote_days\",\"value\":\"2 remote days per week for full-time employees\"}]}",
+      "usage": {
+        "input_tokens": 464,
+        "output_tokens": 30,
+        "estimated": false
+      },
+      "observation": {
+        "ok": false,
+        "error": "invalid claim schema"
+      }
+    }
+  ],
+  "usage": {
+    "input_tokens": 794,
+    "output_tokens": 58,
+    "total_tokens": 852,
+    "estimated": false,
+    "complete": true,
+    "cost_usd": null,
+    "basis": "provider_reported"
+  },
+  "failure_events": [
+    {
+      "step": 2,
+      "category": "soft_failure",
+      "message": "invalid claim schema"
+    }
+  ],
+  "model_mode": "live",
+  "latency_ms": 588.4457150000344,
+  "claims": []
+}

@@ -1,0 +1,124 @@
+[
+  {
+    "id": "agreement",
+    "category": "soft_failure",
+    "status": "needs_clarification",
+    "expected": "verified",
+    "events": []
+  },
+  {
+    "id": "stale_conflict",
+    "category": "soft_failure",
+    "status": "needs_clarification",
+    "expected": "verified",
+    "events": []
+  },
+  {
+    "id": "contractor_scope",
+    "category": "soft_failure",
+    "status": "budget_exhausted",
+    "expected": "needs_clarification",
+    "events": [
+      {
+        "step": 3,
+        "category": "soft_failure",
+        "message": "clarification requires a concise question"
+      }
+    ]
+  },
+  {
+    "id": "missing_policy",
+    "category": "soft_failure",
+    "status": "needs_clarification",
+    "expected": "insufficient_evidence",
+    "events": []
+  },
+  {
+    "id": "single_source",
+    "category": "soft_failure",
+    "status": "needs_clarification",
+    "expected": "insufficient_evidence",
+    "events": []
+  },
+  {
+    "id": "registry_outage",
+    "category": "hard_failure",
+    "status": "needs_clarification",
+    "expected": "insufficient_evidence",
+    "events": [
+      {
+        "step": 2,
+        "category": "hard_failure",
+        "message": "search_policy_registry: ConnectionError"
+      }
+    ]
+  },
+  {
+    "id": "malformed_output",
+    "category": "soft_failure",
+    "status": "budget_exhausted",
+    "expected": "insufficient_evidence",
+    "events": [
+      {
+        "step": 2,
+        "category": "soft_failure",
+        "message": "malformed source response: documents must be a list"
+      },
+      {
+        "step": 4,
+        "category": "soft_failure",
+        "message": "clarification requires a concise question"
+      },
+      {
+        "step": 5,
+        "category": "soft_failure",
+        "message": "malformed source response: documents must be a list"
+      },
+      {
+        "step": 7,
+        "category": "soft_failure",
+        "message": "malformed source response: documents must be a list"
+      }
+    ]
+  },
+  {
+    "id": "tool_timeout",
+    "category": "hard_failure",
+    "status": "budget_exhausted",
+    "expected": "insufficient_evidence",
+    "events": [
+      {
+        "step": 2,
+        "category": "hard_failure",
+        "message": "search_policy_registry: TimeoutError"
+      },
+      {
+        "step": 4,
+        "category": "hard_failure",
+        "message": "search_policy_registry: TimeoutError"
+      },
+      {
+        "step": 5,
+        "category": "soft_failure",
+        "message": "clarification requires a concise question"
+      },
+      {
+        "step": 7,
+        "category": "hard_failure",
+        "message": "search_policy_registry: TimeoutError"
+      },
+      {
+        "step": 8,
+        "category": "soft_failure",
+        "message": "two distinct source publishers must be consulted"
+      }
+    ]
+  },
+  {
+    "id": "step_budget",
+    "category": "soft_failure",
+    "status": "budget_exhausted",
+    "expected": "verified",
+    "events": []
+  }
+]

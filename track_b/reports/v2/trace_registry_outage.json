@@ -1,0 +1,90 @@
+{
+  "query": "How many annual leave days do full-time employees get?",
+  "status": "needs_clarification",
+  "answer": "Which employee policy and employment type do you mean?",
+  "citations": [],
+  "steps": 2,
+  "trace": [
+    {
+      "step": 1,
+      "context": {
+        "query": "How many annual leave days do full-time employees get?",
+        "notes": [],
+        "history": [],
+        "remaining_steps": 6,
+        "max_steps": 6
+      },
+      "decision": {
+        "action": "search_policy_registry",
+        "arguments": {
+          "query": "annual leave for full-time employees"
+        }
+      },
+      "raw_response": "{\"action\":\"search_policy_registry\",\"arguments\":{\"query\":\"annual leave for full-time employees\"}}",
+      "usage": {
+        "input_tokens": 468,
+        "output_tokens": 19,
+        "estimated": false
+      },
+      "tool_call": {
+        "name": "search_policy_registry",
+        "arguments": {
+          "query": "annual leave for full-time employees"
+        }
+      },
+      "observation": {
+        "ok": false,
+        "error": "ConnectionError"
+      }
+    },
+    {
+      "step": 2,
+      "context": {
+        "query": "How many annual leave days do full-time employees get?",
+        "notes": [],
+        "history": [
+          {
+            "action": "search_policy_registry",
+            "ok": false,
+            "error": "ConnectionError"
+          }
+        ],
+        "remaining_steps": 5,
+        "max_steps": 6
+      },
+      "decision": {
+        "action": "clarify",
+        "question": "What is the current policy for annual leave days for full-time employees?"
+      },
+      "raw_response": "{\"action\":\"clarify\",\"question\":\"What is the current policy for annual leave days for full-time employees?\"}",
+      "usage": {
+        "input_tokens": 488,
+        "output_tokens": 24,
+        "estimated": false
+      },
+      "observation": {
+        "ok": true,
+        "terminal": "needs_clarification"
+      }
+    }
+  ],
+  "usage": {
+    "input_tokens": 956,
+    "output_tokens": 43,
+    "total_tokens": 999,
+    "estimated": false,
+    "complete": true,
+    "cost_usd": null,
+    "basis": "provider_reported"
+  },
+  "failure_events": [
+    {
+      "step": 1,
+      "category": "hard_failure",
+      "message": "search_policy_registry: ConnectionError"
+    }
+  ],
+  "model_mode": "live",
+  "latency_ms": 438.2403530003103,
+  "claims": []
+}

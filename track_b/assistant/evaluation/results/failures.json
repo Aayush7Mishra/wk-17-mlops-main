@@ -1,0 +1,9 @@
+[
+  {
+    "id": "step_budget",
+    "category": "soft_failure",
+    "status": "budget_exhausted",
+    "expected": "verified",
+    "events": []
+  }
+]
